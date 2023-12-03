@@ -28,7 +28,6 @@ def get_chars_in_range(schematic, loc1, loc2):
     """
     output = []
     
-    # Assume loc1 has lowest i and j values
     i_max = max(loc1[0], loc2[0])
     j_max = max(loc1[1], loc2[1])
         
@@ -53,33 +52,37 @@ def part1():
     
     for i, row in enumerate(schematic):
         
-        determining_number_length = False
+        getting_number_length = False
         found_number = False
         if i == 0: continue # The first row is my padding
         
         for j, char in enumerate(row):
             
             if not char.isdigit():
-                if determining_number_length:
-                    determining_number_length = False
+                if getting_number_length:
+                    getting_number_length = False
                     last_digit_loc = [i, j-1]
                     found_number = True
                 else:
                     continue 
-            elif not schematic[i][j-1].isdigit() and not determining_number_length:
+            elif not schematic[i][j-1].isdigit() and not getting_number_length:
                 first_digit_loc = [i,j]
-                determining_number_length = True
+                getting_number_length = True
             
             if found_number:
-                number = int("".join(get_chars_in_range(schematic, first_digit_loc, last_digit_loc)))
-                first_digit_loc[0] = first_digit_loc[0] - 1
-                last_digit_loc[0] = last_digit_loc[0] + 1
-                first_digit_loc[1] = first_digit_loc[1] - 1
-                last_digit_loc[1] = last_digit_loc[1] + 1
+                number = int("".join(get_chars_in_range(
+                    schematic, first_digit_loc, last_digit_loc)))
                 
-                scanned_chars = get_chars_in_range(schematic, first_digit_loc, last_digit_loc)
+                for p in range(2):
+                    first_digit_loc[p] = first_digit_loc[p] - 1                    
+                    last_digit_loc[p] = last_digit_loc[p] + 1
+                
+                scanned_chars = get_chars_in_range(
+                    schematic, first_digit_loc, last_digit_loc)
+                
                 if set(symbols).intersection(scanned_chars):
                     answer += number
+                    
                 first_digit_loc, last_digit_loc = [0,0], [0,0]
                 found_number = False
                     
