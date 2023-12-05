@@ -2,6 +2,8 @@
 def part2():    
     
     data = open("day_04/input_day_04.txt").read().split("\n")
+    
+    # Initialise totals
     card_copies = [1] * len(data)
     
     for i, row in enumerate(data):
@@ -18,7 +20,7 @@ def part2():
         matches = set(my_numbers).intersection(winning_numbers)
         num_of_matches = len(matches)     
 
-        # Count the dupes - why didn't I think of this sooner?   
+        # Don't make the data, count the totals
         for j in range(i+1, i+1+num_of_matches):
             card_copies[j] += card_copies[i]
     
