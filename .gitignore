@@ -163,4 +163,4 @@ cython_debug/
 .vscode/
 .random_crap/
 
-input_day*
+*input_day*

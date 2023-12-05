@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from aocd import get_data
 
-day = 4
+day = 5
 year = 2023
 
 url = f"https://adventofcode.com/{year}/day/{day}"
@@ -35,6 +35,3 @@ data = get_data(day=day, year=year)
 
 with open(f"day_{day:02}/input_day_{day:02}.txt", "w") as f:
     f.write(data)
-
-open(f"day_{day:02}/part1.py","w")
-open(f"day_{day:02}/part2.py","w")
