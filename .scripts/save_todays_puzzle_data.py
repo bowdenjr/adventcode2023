@@ -35,3 +35,6 @@ data = get_data(day=day, year=year)
 
 with open(f"day_{day:02}/input_day_{day:02}.txt", "w") as f:
     f.write(data)
+
+open(f"day_{day:02}/part1.py","w")
+open(f"day_{day:02}/part2.py","w")
