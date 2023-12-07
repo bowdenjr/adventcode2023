@@ -31,7 +31,7 @@ def part1():
         }
 
     # with open("day_05/test_data_day_05.txt","r") as f:
-    with open("day_05\input_day_05.txt","r") as f:
+    with open("day_05/input_day_05.txt","r") as f:
 
         for row in f.readlines():
             

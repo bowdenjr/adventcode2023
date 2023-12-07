@@ -10,3 +10,5 @@ This helps force you to do rubber duck programming.
 Write out what you want the output to be for each step and then write code to create it.
 #### 5. Don't look up the solution and don't cheat
 You'll hate yourself for it. It won't be your own victory and you'll feel even more stupid later.
+#### 6. Think about a solution in a different way
+Try reversing the algorithm, try only calculating the totals
