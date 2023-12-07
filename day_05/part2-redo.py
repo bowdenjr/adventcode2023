@@ -17,7 +17,7 @@ def filter_seed(interval_maps, x):
                 break
     return x
 
-def filter_seed_range(interval_maps, x):
+def filter_seed_range(interval_maps, x: tuple):
     """
     TODO: Make this work for ranges rather than indiv values
     Bear in mind that the intervals may get split into different mappings
@@ -27,8 +27,14 @@ def filter_seed_range(interval_maps, x):
     the branches. In this example, I would need to re-filter (84,88) and
     (12,14)
     """
+
     for map in interval_maps:
         for block in map:
+
+            # Case #1 - where range is entirely in one line of source range
+            if max(55,52) < min(68,99)
+
+
             if x in range(block[0][0], block[0][1] + 1):
                 x = block[1][0] + (x - block[0][0])
                 break
@@ -77,11 +83,8 @@ for map in almanac:
     interval_maps.append(convert_map_to_list_of_intervals(map))
 
 for x, y in seed_intervals:
-    x = filter_seed(interval_maps, x)
-    y = filter_seed(interval_maps, y)
+    x = filter_seed_range(interval_maps, (x,y))
+    y = filter_seed_range(interval_maps, y)
     
     print(x, y)
 
-
-
-print("ASD")
