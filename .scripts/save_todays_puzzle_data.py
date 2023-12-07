@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from aocd import get_data
 
-day = 5
+day = 6
 year = 2023
 
 url = f"https://adventofcode.com/{year}/day/{day}"
