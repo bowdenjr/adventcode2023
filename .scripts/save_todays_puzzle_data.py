@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from aocd import get_data
 
-day = 7
+day = 8
 year = 2023
 
 url = f"https://adventofcode.com/{year}/day/{day}"
@@ -31,7 +31,7 @@ else:
     print('Error: Could not extract text from URL.')
     
 
-data = get_data(day=day, year=year)
+data = get_data(session=cookies["session"] , day=day, year=year)
 
 with open(f"day_{day:02}/input_day_{day:02}.txt", "w") as f:
     f.write(data)
