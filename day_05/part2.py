@@ -1,5 +1,3 @@
-import sys
-
 
 def get_seed_loc(seed_output, map):
 
