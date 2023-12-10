@@ -1,4 +1,5 @@
 
+
 def convert_map_to_list_of_intervals(map):
     
     source_intervals = [(sub_map[1], sub_map[1] + sub_map[2] - 1) 
@@ -17,9 +18,9 @@ def filter_seed(interval_maps, x):
                 break
     return x
 
+
 def filter_seed_range(interval_maps, x: tuple):
     """
-    TODO: Make this work for ranges rather than indiv values
     Bear in mind that the intervals may get split into different mappings
     e.g. (50,57) -> (84,14), which doesn't make sense until you realise
     that (50,54) mapped to the range (84, 88) and (55,57) mapped to (12,14).
@@ -29,17 +30,56 @@ def filter_seed_range(interval_maps, x: tuple):
     """
 
     for map in interval_maps:
-        for block in map:
 
-            # Case #1 - where range is entirely in one line of source range
-            if max(55,52) < min(68,99)
+        
+        # Identify how many maps overlap with my range
+        for block in map:
+            
+            overlap_types_in_map = {"source_subset":0, "left_overlap":0,
+                                    "right_overlap":0, "dest_subset":0}
+            
+            x_min, x_max = x
+            block_min, block_max = block[1]
+            
+            if (x_min < block_min and x_max < block_max):
+                # source subset of dest
+                overlap_types_in_map["source_subset"] += 1
+            
+            elif (x_min < block_min and x_max > block_max):
+                # left overlap
+                overlap_types_in_map["left_overlap"] += 1
+            
+            elif (x_min > block_min and x_max < block_max):
+                # right overlap
+                overlap_types_in_map["right_overlap"] += 1
+            
+            elif (x_min > block_min and x_max > block_max):
+                # dest subset of source
+                overlap_types_in_map["dest_subset"] += 1        
+            
+            if sum(overlap_types_in_map.values()) == 0:
+                return [filter_seed(interval_maps, a) for a in x]
+            elif sum(overlap_types_in_map.values()) > 1:
+                raise NotImplementedError
+            else:
+                if overlap_types_in_map["source_subset"] > 0:
+                    # map the whole range
+                    pass
+                elif overlap_types_in_map["left_overlap"] > 0:
+                    pass
+                elif overlap_types_in_map["right_overlap"] > 0:
+                    pass
+                elif overlap_types_in_map["dest_subset"] > 0:
+                    pass
+            
+            # if max(x[0],block[1][0]) < min():
+            #     pass
 
 
             if x in range(block[0][0], block[0][1] + 1):
                 x = block[1][0] + (x - block[0][0])
                 break
-    return x
-
+    return None
 
 almanac = {"seeds": [], "seed-": [], "soil-": [], "ferti": [], "water": [],
            "light": [], "tempe": [], "humid": []}
@@ -83,8 +123,8 @@ for map in almanac:
     interval_maps.append(convert_map_to_list_of_intervals(map))
 
 for x, y in seed_intervals:
-    x = filter_seed_range(interval_maps, (x,y))
-    y = filter_seed_range(interval_maps, y)
+    x = filter_seed_range(interval_maps, (x, y))
+
     
     print(x, y)
 
